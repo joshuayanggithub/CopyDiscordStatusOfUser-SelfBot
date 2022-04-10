@@ -3,9 +3,9 @@ from discord.ext import commands,tasks
 
 f = open( "info.txt" ,"r")
 statuschange_url = "https://discord.com/api/v9/users/@me/settings"
-token = f.readline()
-user_id = int (f.readline()) #test/sample id = 962488616058245140
-sharedguild_id = int (f.readline()) #test/sample id = 962491841293467650
+token = str(f.readline().strip())
+user_id = int (f.readline().strip()) #test/sample id = 962488616058245140
+sharedguild_id = int (f.readline().strip()) #test/sample id = 962491841293467650
 oldstatus = ""
 
 intents = discord.Intents.all()
