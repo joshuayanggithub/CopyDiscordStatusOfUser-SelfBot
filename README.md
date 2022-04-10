@@ -9,5 +9,8 @@ You also need your discord [authorization token](https://www.youtube.com/watch?v
 
 After you paste those values into the info.txt file, you are ready to run the program.
 
-TThe program runs using python requests library to change the user's message status and discord library api to access other person's status. It checks the user's status every minute, because by running this program **you are at risk of being banned by violating discord's anti-self bot policy** (use at own risk), **although it's likely discord has more important things to worry about,** as long as the program is not sending too many requests (which this one probably isn't).
+The program runs using python requests library to change the user's message status and discord library api to access other person's status. It checks the user's status every minute, because by running this program **you are at risk of being banned by violating discord's anti-self bot policy** (use at own risk), **although it's likely discord has more important things to worry about,** as long as the program is not sending too many requests (which this one probably isn't).
 
+<img width="1048" alt="Screen Shot 2022-04-09 at 6 49 53 PM" src="https://user-images.githubusercontent.com/85262856/162597760-9ac09009-c18b-4570-a5bb-6f365a05bc05.png">
+
+<img width="288" alt="Screen Shot 2022-04-09 at 6 50 16 PM" src="https://user-images.githubusercontent.com/85262856/162597766-86eeef15-bdd4-47cd-ab90-519b97bc2feb.png">
