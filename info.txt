@@ -1,0 +1,3 @@
+Add Your Discord Token Here (Search up or read description to find out how to get this)
+Add User ID of Person whose status you want to copy here
+Add Server ID of server you share with that person here
