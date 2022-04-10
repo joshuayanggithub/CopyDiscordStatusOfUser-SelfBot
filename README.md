@@ -13,4 +13,6 @@ The program runs using python requests library to change the user's message stat
 
 <img width="1048" alt="Screen Shot 2022-04-09 at 6 49 53 PM" src="https://user-images.githubusercontent.com/85262856/162597760-9ac09009-c18b-4570-a5bb-6f365a05bc05.png">
 
-<img width="288" alt="Screen Shot 2022-04-09 at 6 50 16 PM" src="https://user-images.githubusercontent.com/85262856/162597766-86eeef15-bdd4-47cd-ab90-519b97bc2feb.png">
+
+<img width="277" alt="Screen Shot 2022-04-09 at 6 51 31 PM" src="https://user-images.githubusercontent.com/85262856/162597816-b022b839-c658-4c25-a4f7-f6c3b34b7c23.png">
+<img width="293" alt="Screen Shot 2022-04-09 at 6 52 11 PM" src="https://user-images.githubusercontent.com/85262856/162597818-4c70e4dc-3471-406b-91a9-345265e337c2.png">
