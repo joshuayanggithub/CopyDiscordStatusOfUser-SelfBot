@@ -13,6 +13,12 @@ intents.members = True
 intents.guilds = True
 bot = commands.Bot(command_prefix='>', self_bot=True, intents=intents) #random command prefix
 
+def formattedPrint(str):
+	print("------------------------------------------------------------------------------------")
+	print(str)
+	print("------------------------------------------------------------------------------------")
+def getFormattedTime():
+    return time.strftime('%H:%M%p %Z on %b %d, %Y')
 def changeStatus(message):
 	payload = {
 		"status": "online",
@@ -26,17 +32,17 @@ def changeStatus(message):
 	}
 	r = requests.patch(statuschange_url, data=json.dumps(payload), headers=headers)
 	if (r.status_code == 200): #success
-		print("Succesfully changed status to " + message + " | " + time.strftime('%H:%M%p %Z on %b %d, %Y'))
+		formattedPrint("Succesfully changed status to\n" + message + "\nAt " + getFormattedTime())
 	else: #400
-		print("Error in changing status...")
+		formattedPrint("Error in changing status..." + getFormattedTime())
 def storeOldStatus(status):
 	print("Stored Old Status")	
 	
 @bot.event
 async def on_ready():
-	print("I am running on the account: " + bot.user.name)
-	print("WARNING: Self-bots on discord can get you banned")
-	checkStatus.start()
+    formattedPrint("Running on the account: " + bot.user.name)
+    formattedPrint("WARNING: Self-bots on discord can get you banned" + "\nStarted Bot...")
+    checkStatus.start()
 @tasks.loop(minutes=1)
 async def checkStatus():
 	guild = bot.get_guild(sharedguild_id)
@@ -51,5 +57,6 @@ async def checkStatus():
 				changeStatus(status)
 	else:
 		await bot.change_presence(status=discord.Status.offline)
+		formattedPrint("Target User Not Online at " + getFormattedTime())
 
 bot.run(token, bot=False)
