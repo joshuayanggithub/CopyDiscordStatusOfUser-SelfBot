@@ -1,7 +1,7 @@
 # CopyDiscordStatusOfUser-SelfBot
 
 # Basic Function
-Automatically copy the Discord Status of a Friend User whom you share a server with (These conditions have to be satisfied to work!)
+Automatically copy the Discord Status of a friend User whom you share a server with (These conditions have to be satisfied to work!)
 
 # Installation
 You must haved installed python 3 (with default standard libraries) as well as the discord.py python library by typing in terminal the following:
@@ -9,6 +9,10 @@ You must haved installed python 3 (with default standard libraries) as well as t
 pip install discord.py
 ```
 Then go ahead and download both the 'UserToken&IDs.txt', 'oldstatus.txt', and 'statuscopier.py' file from this repository in the same directory/folder
+
+# Requirements for the Program to Work (READ)
+
+You have to be friended to the person whose status you want to copy, as well as share a server with them. Although further investigation might find a more lenient way to achieve the same purpose of the program, these rules hold because with the discord api the only way I have found to access the status of someone is through the 'activity' of a 'Member' object, which can only be accessed through sharing a server. In addition, I believe discord won't allow selfbots to access Member objects without being friended to them and I believe that is do to me not being able to add [Discord Intents](https://discordpy.readthedocs.io/en/stable/intents.html) as a selfbot.
 
 # Setup (IMPORTANT: MUST READ)
 
