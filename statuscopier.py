@@ -10,6 +10,7 @@ f.close()
 
 f2 = open("oldstatus.txt","r")
 oldstatus = f2.readline().strip()
+offline = False
 
 intents = discord.Intents.all()
 intents.members = True
@@ -21,10 +22,30 @@ def formattedPrint(str):
 	print(str)
 	print("------------------------------------------------------------------------------------")
 def getFormattedTime():
-    return time.strftime('%I:%M %p %Z on %b %d, %Y')
-def changeStatus(message):
+    return time.strftime('%I:%M:%S %p %Z on %b %d, %Y')
+def changeStatusOffline():
 	payload = {
-		"status": "online",
+		"status": "invisible",
+	}
+	headers = {
+		"authorization": token,
+		"content-type": "application/json"
+	}
+	r = requests.patch(statuschange_url, data=json.dumps(payload), headers=headers)
+	if (r.status_code == 200): #success
+		formattedPrint("Succesfully went invisible " + "\nAt " + getFormattedTime())
+		updateOldStatus("NO STATUS: (invisible)")
+	else: #400
+		formattedPrint("Error in going invisible..." + getFormattedTime())
+def updateOldStatus(status):
+	global oldstatus
+	oldstatus = status
+	f3 = open("oldstatus.txt","w")
+	f3.write(status)
+	f3.close()
+def changeStatus(message,str_status):
+	payload = {
+		"status": str_status,
 		"custom_status": {
 			"text": message,
 		}
@@ -35,14 +56,23 @@ def changeStatus(message):
 	}
 	r = requests.patch(statuschange_url, data=json.dumps(payload), headers=headers)
 	if (r.status_code == 200): #success
-		formattedPrint("Succesfully changed status to\n\" " + message + " \"\nAt " + getFormattedTime())
-		f3 = open("oldstatus.txt","w")
-		f3.write(message)
-		f3.close()
+		formattedPrint("Succesfully changed status to\n\"" + message + "\"\nwhilst on " + str_status + " mode \nAt " + getFormattedTime())
+		updateOldStatus(message)
 	else: #400
-		formattedPrint("Error in changing status..." + getFormattedTime())
-def storeOldStatus(status):
-	print("Stored Old Status")	
+		formattedPrint("Error in changing status... at " + getFormattedTime())
+def changeAboutMe(message):
+	payload = {
+		"bio": message
+	}
+	headers = {
+		"authorization": token,
+		"content-type": "application/json"
+	}
+	r = requests.patch(statuschange_url, data=json.dumps(payload), headers=headers)
+	if (r.status_code == 200): #success
+		formattedPrint("Succesfully changed about me to\n\" " + message + " \"\nAt " + getFormattedTime())
+	else: #400
+		formattedPrint("Error in changing about me..." + getFormattedTime())
 	
 @bot.event
 async def on_ready():
@@ -51,22 +81,30 @@ async def on_ready():
     checkStatus.start()
 @tasks.loop(minutes=1)
 async def checkStatus():
+	global oldstatus, offline
 	guild = bot.get_guild(sharedguild_id)
 	person = guild.get_member(user_id)
 	if (str(person.raw_status) != "offline"):
+		offline = False
 		activities = person.activities
+		str_status = person.raw_status
 		if (len(activities) != 0):
 			status = str(activities[0])
-			global oldstatus
 			if (status != oldstatus):
-				oldstatus = status
-				changeStatus(status)
+				changeStatus(status,str_status)
 			else:
 				formattedPrint("Your status matches person's status already | " + getFormattedTime())
 		else:
+			status = "Baller"
+			if (status != oldstatus):
+				oldstatus = status
+				changeStatus(status,str_status)
 			formattedPrint("Person currently has no status | " + getFormattedTime())
 	else:
-		await bot.change_presence(status=discord.Status.offline)
+		#await bot.change_presence(status=discord.Status.offline)
+		if (not offline):
+			offline = True
+			changeStatusOffline()
 		formattedPrint("Target User Not Online | " + getFormattedTime())
 
 bot.run(token, bot=False)
