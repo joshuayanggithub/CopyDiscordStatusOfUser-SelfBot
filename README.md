@@ -1,7 +1,7 @@
 # CopyDiscordStatusOfUser-SelfBot
 
 # Basic Function
-Automatically copy the Discord Status of a friend User whom you share a server with (These conditions have to be satisfied to work!)
+Automatically copy the Discord Status of a friend User whom you share a server with (These conditions have to be satisfied to work!). A safe interval would be every 5 minutes, every minute should work fine. My current interval is 10, because of getting warned.
 
 # Installation
 You must haved installed python 3 (with default standard libraries) as well as the discord.py python library by typing in terminal the following:
